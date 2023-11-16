@@ -1,0 +1,23 @@
+# app/views/lists/new.html.erb
+
+<h1>Create a New List</h1>
+
+<%= form_with(model: @list, url: lists_path, method: "post") do |form| %>
+  <div>
+    <%= form.label :name, "List Name" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <h2>Select Movies to Add to the List</h2>
+    <% @movies.each do |movie| %>
+      <label>
+        <%= image_tag movie.poster_url, alt: movie.title, width: 200 %>
+        <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
+        <%= movie.title %>
+      </label>
+    <% end %>
+  </div>
+
+  <%= form.submit "Create List" %>
+<% end %>
