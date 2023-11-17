@@ -1,6 +1,21 @@
-<h1><div class = card d-flex><%= @list.name %></div></h1>
-<ul>
-<% @movies[0].each do |movie| %>
-<li><%= movie %></li>
-<% end %>
-</ul>
+<div class="container">
+<h1><div class = "card text-center" d-flex><%= @list.name %></div></h1>
+  <div class="row justify-content-start">
+<% @movies.each do |movie| %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card text-center">
+             <%= image_tag movie.poster_url, alt: movie.title, class: "card-img-top", width: 200 %>
+          <div class="card-body">
+            <%= movie.title %>
+          </div>
+          <div class="card-footer">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <%= link_to 'Delete',
+  list_path(@list),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure ?"}
+  %>
+</div>
+</div>
