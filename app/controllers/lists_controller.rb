@@ -17,13 +17,14 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to lists_path, notice: 'Liste créée avec succès.'
     else
-      render :new
+      render :new, :unprocessable_entity
     end
   end
 
   # Action pour afficher les détails d'une liste spécifique
   def show
     @list = List.find(params[:id])
+    @movies = @list.movies
   end
 
   private

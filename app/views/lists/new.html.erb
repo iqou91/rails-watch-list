@@ -1,5 +1,3 @@
-# app/views/lists/new.html.erb
-
 <h1>Create a New List</h1>
 
 <%= form_with(model: @list, url: lists_path, method: "post") do |form| %>
@@ -8,16 +6,30 @@
     <%= form.text_field :name %>
   </div>
 
-  <div>
-    <h2>Select Movies to Add to the List</h2>
+<div class="container">
+  <h2>Sélectionnez des films à ajouter à la liste</h2>
+  <div class="row justify-content-start">
     <% @movies.each do |movie| %>
-      <label>
-        <%= image_tag movie.poster_url, alt: movie.title, width: 200 %>
-        <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
-        <%= movie.title %>
-      </label>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card text-center">
+         <label> <%= image_tag movie.poster_url, alt: movie.title, class: "card-img-top", width: 200 %>
+          <div class="card-body">
+            <%= movie.title %>
+          </div>
+          <div class="card-footer">
+            <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
+          </div>
+           </label>
+        </div>
+      </div>
     <% end %>
   </div>
 
-  <%= form.submit "Create List" %>
+  <div class="text-center">
+    <%= form.submit "Create List", class: "btn btn-primary m-3" %>
+    </div>
+  </div>
+<div class="mb-3"></div>
+</div>
+
 <% end %>
